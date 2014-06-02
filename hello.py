@@ -8,8 +8,3 @@ app.config.from_pyfile('config.py')
 @app.route('/')
 def hello_world():
     return render_template('hello.html')
-
-@app.route('/campaigns/')
-def campaigns_json():
-	f = json.loads(open('campaigns.json').read())
-	return jsonify(results=f)
