@@ -4,6 +4,7 @@ import requests
 import json
 import os
 import urllib2
+import time
 
 sched = Scheduler()
 
@@ -15,6 +16,9 @@ def timed_job():
 
 	# Create new campaigns list
 	data_update = []
+
+	# Timestamp
+	ts = int(time.time())
 
 	# Iterate through campaigns
 	for list in data:
@@ -33,6 +37,7 @@ def timed_job():
 			amountRaisedFull = tree.xpath('//div[@class="i-balance"]/span/span/text()')
 			thisDict['amountRaised'] = amountRaisedFull[0][1:]
 			thisDict['url'] = list['url']
+			thisDict['updated'] = ts
 
 			data_update.append(thisDict)
 
