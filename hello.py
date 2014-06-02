@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, jsonify
 import json
 
 app = Flask(__name__)
@@ -9,7 +9,7 @@ app.config.from_pyfile('config.py')
 def hello_world():
     return 'Hello World!'
 
-@app.route('/campaigns.json')
+@app.route('/campaigns/')
 def campaigns_json():
 	f = json.loads(open('campaigns.json').read())
-	return flask.jsonify(**f)
+	return jsonify(results=f)
