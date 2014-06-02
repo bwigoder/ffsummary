@@ -5,7 +5,7 @@ import json
 
 sched = Scheduler()
 
-@sched.interval_schedule(minutes=10)
+@sched.interval_schedule(minutes=1)
 def timed_job():
 	# Load campaigns pickle file
 	data = json.loads(open('campaigns.json').read())
