@@ -3,13 +3,15 @@ from lxml import html
 import requests
 import json
 import os
+import urllib2
 
 sched = Scheduler()
 
 @sched.interval_schedule(minutes=1)
 def timed_job():
-	# Load campaigns pickle file
-	data = json.loads(open('campaigns.json').read())
+	# Load campaigns json file
+	j = urllib2.urlopen('https://s3-eu-west-1.amazonaws.com/wiggysweb/campaigns.json')
+	data = json.load(j)
 
 	# Create new campaigns list
 	data_update = []
