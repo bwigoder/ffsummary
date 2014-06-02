@@ -33,9 +33,9 @@ def timed_job():
 
 			data_update.append(thisDict)
 
-		# Save new campaign list
-		with open('campaigns.json', 'w') as outfile:
-			json.dump(data_update, outfile, indent=4, sort_keys=True)
+	# Save new campaign list
+	with open('campaigns.json', 'w') as outfile:
+		json.dump(data_update, outfile, indent=4, sort_keys=True)
 
 sched.start()
 
