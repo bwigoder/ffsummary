@@ -3,9 +3,13 @@
 <head>
   <meta charset="utf-8">
   <title>Founders Forum 2014 Reverse Pitch</title>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
-
- 
+<script>
+$.getJSON( "http://s3-eu-west-1.amazonaws.com/wiggysweb/campaigns.json", function( json ) {
+  console.log( "JSON Data: " + json );
+ });
+ </script>
 </body>
 </html>
