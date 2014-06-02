@@ -12,4 +12,4 @@ def hello_world():
 @app.route('/campaigns.json')
 def campaigns_json():
 	f = json.loads(open('campaigns.json').read())
-	flask.jsonify(**f)
+	return flask.jsonify(**f)
