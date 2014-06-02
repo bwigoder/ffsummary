@@ -2,6 +2,7 @@ from apscheduler.scheduler import Scheduler
 from lxml import html
 import requests
 import json
+import os
 
 sched = Scheduler()
 
@@ -33,11 +34,28 @@ def timed_job():
 
 			data_update.append(thisDict)
 
-	# Save new campaign list
-	with open('campaigns.json', 'w') as outfile:
-		json.dump(data_update, outfile, indent=4, sort_keys=True)
+	# AWS lib
+	import boto
+	import boto.s3.connection
+	s3 = boto.connect_s3()
+	AWS_ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
+	AWS_SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+	
+	conn = boto.connect_s3(
+		aws_access_key_id = AWS_ACCESS_KEY,
+		aws_secret_access_key = AWS_SECRET_KEY,
+		host = 's3-eu-west-1.amazonaws.com',
+		#is_secure=False,               # uncommmnt if you are not using ssl
+		calling_format = boto.s3.connection.OrdinaryCallingFormat(),
+		)
+
+	bucket = conn.get_bucket('wiggysweb')
+
+	key = bucket.new_key('campaigns.json')
+	key.set_contents_from_string(json.dumps(data_update, indent=4, sort_keys=True))
+	key.set_canned_acl('public-read')
 
 sched.start()
 
 while True:
-    pass
+	pass
