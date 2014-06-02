@@ -35,7 +35,7 @@ def timed_job():
 
 		# Save new campaign list
 		with open('campaigns.json', 'w') as outfile:
-			json.dump(data, outfile, indent=4, sort_keys=True)
+			json.dump(data_update, outfile, indent=4, sort_keys=True)
 
 sched.start()
 
