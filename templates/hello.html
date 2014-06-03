@@ -3,13 +3,40 @@
 <head>
   <meta charset="utf-8">
   <title>Founders Forum 2014 Reverse Pitch</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <style>
+  body { background: #FFFFFF; }
+  .campaign { float: left; text-align: center; color: #003366; height: 100%; }
+  h1 { font-size: 24px; }
+  </style>
 </head>
 <body>
 <script>
-$.getJSON( "http://s3-eu-west-1.amazonaws.com/wiggysweb/campaigns.json", function( json ) {
-  console.log( "JSON Data: " + json );
- });
+$.get( "http://s3-eu-west-1.amazonaws.com/wiggysweb/campaigns.json" )
+  .done(function( data ) {
+	var json_obj = $.parseJSON(data);
+	for (var i = 0; i < json_obj.length; i++) {
+		create_campaign(json_obj[i]);
+	}
+	style_page((100/json_obj.length));
+  });
+
+function create_campaign(data) {
+	html = '';
+	html += '<div class="campaign"><h1>' + data['campaignName'] + '</h1>';
+	html += '<div class="progressbar" value="'+ data['amountTotal'] +'"></div>';
+	html += '</div>';
+	$( "body" ).append(html);
+}
+
+function style_page(campaign_width) {
+	$( ".campaign" ).css("width",campaign_width+'%');
+	$.each($(".progressbar"), function() {
+	    $(this).progressbar({ value: parseInt($(this).attr("value")) });
+	});
+}
  </script>
 </body>
 </html>

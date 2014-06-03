@@ -32,10 +32,10 @@ def timed_job():
 			# Parse tree
 			thisDict['campaignName'] = str(tree.xpath('//h1/text()')[0])
 			amountTargetFull = tree.xpath('//span[@class="currency"]/span/text()')
-			thisDict['amountTarget'] = amountTargetFull[0][1:]
+			thisDict['amountTarget'] = str(amountTargetFull[0][1:]).replace(',', '')
 			thisDict['currency'] = amountTargetFull[0][0:1]
 			amountRaisedFull = tree.xpath('//div[@class="i-balance"]/span/span/text()')
-			thisDict['amountRaised'] = amountRaisedFull[0][1:]
+			thisDict['amountRaised'] = str(amountRaisedFull[0][1:]).replace(',', '')
 			thisDict['url'] = list['url']
 			thisDict['updated'] = ts
 
