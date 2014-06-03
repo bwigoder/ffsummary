@@ -22,6 +22,8 @@
   .target { color: rgba(255, 255, 255, 0.9) }
   hr { border-color: rgba(255, 255, 255, 0.7); margin: 20px 0 0 0;}
   h1 { font-size: 21px; margin: 20px 0;}
+  h1 a { text-decoration: none; color: #FFF; }
+  h1 a:hover { text-decoration: underline; }
   .ui-progressbar {
     position: relative;
   }
@@ -52,7 +54,7 @@ function create_campaign(data) {
 	progress = ((data['amountRaised']/data['amountTarget'])*100).toFixed(0);
 	html = '';
 	html += '<div class="campaign"><div class="container">';
-	html += '<h1>' + data['campaignName'].substring(0,20) + '</h1>';
+	html += '<h1><a href="' + data['url'] + '">' + data['campaignName'].substring(0,20) + '</a></h1>';
 	html += '<div class="progressbar" value="'+ progress +'%"><div class="progress-label">'+ progress +'%</div></div>';
 	html += '<div class="raised">' + data['currency'] + data['amountRaised'] +'</div>';
 	html += '<div class="target">Target: ' + data['currency'] + data['amountTarget'] + '</div>';
