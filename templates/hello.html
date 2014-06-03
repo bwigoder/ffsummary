@@ -4,12 +4,30 @@
   <meta charset="utf-8">
   <title>Founders Forum 2014 Reverse Pitch</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <style>
-  body { background: #FFFFFF; }
-  .campaign { float: left; text-align: center; color: #003366; height: 100%; }
-  h1 { font-size: 24px; }
+  body { background: #222; font-family: 'Montserrat', sans-serif; }
+  .campaign { float: left; text-align: center; color: #FFF; height: 100%; }
+  .container { margin: 0 25px; }
+  .raised { margin: 20px 0 10px 0; color: #FFFF00; font-size: 60px;}
+  .target { color: #FFCC66; }
+  hr { border-color: #FFCC66; margin: 20px 0 0 0;}
+  h1 { font-size: 21px; }
+  .ui-progressbar {
+    position: relative;
+  }
+  .progress-label {
+    position: absolute;
+    left: 45%;
+    top: 6px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+  }
+  table { width: 100%; margin: 5px 0 0 0; }
+  td.pledge_name { text-align: left; }
+  td.pledge_amount { text-align: right; }
   </style>
 </head>
 <body>
@@ -20,14 +38,34 @@ $.get( "http://s3-eu-west-1.amazonaws.com/wiggysweb/campaigns.json" )
 	for (var i = 0; i < json_obj.length; i++) {
 		create_campaign(json_obj[i]);
 	}
-	style_page((100/json_obj.length));
+	style_page((100/json_obj.length).toFixed(2));
   });
 
 function create_campaign(data) {
+	progress = ((data['amountRaised']/data['amountTarget'])*100).toFixed(0);
 	html = '';
-	html += '<div class="campaign"><h1>' + data['campaignName'] + '</h1>';
-	html += '<div class="progressbar" value="'+ data['amountTotal'] +'"></div>';
-	html += '</div>';
+	html += '<div class="campaign"><div class="container">';
+	html += '<h1>' + data['campaignName'].substring(0,20) + '</h1>';
+	html += '<div class="progressbar" value="'+ progress +'%"><div class="progress-label">'+ progress +'%</div></div>';
+	html += '<div class="raised">' + data['currency'] + data['amountRaised'] +'</div>';
+	html += '<div class="target">Target: ' + data['currency'] + data['amountTarget'] + '</div>';
+	html += '<hr>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '</div></div>';
 	$( "body" ).append(html);
 }
 
