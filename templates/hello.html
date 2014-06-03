@@ -2,18 +2,22 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="refresh" content="60">
   <title>Founders Forum 2014 Reverse Pitch</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/ui-lightness/jquery-ui.min.css">
   <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <style>
   body { background: #222; font-family: 'Montserrat', sans-serif; }
-  .campaign { float: left; text-align: center; color: #FFF; height: 100%; }
+  .campaign { float: left; text-align: center; color: #FFF; height: 100%; margin: 4px 6px; width:31%; }
+  .campaign:nth-of-type(1), .campaign:nth-of-type(1) .container .ui-corner-left { background: #ec663c; border-color: #ec663c; }
+  .campaign:nth-of-type(2), .campaign:nth-of-type(2) .container .ui-corner-left { background: #47bbb3; border-color: #47bbb3; }
+  .campaign:nth-of-type(3), .campaign:nth-of-type(3) .container .ui-corner-left { background: #ff9618; border-color: #ff9618; }
   .container { margin: 0 25px; }
-  .raised { margin: 20px 0 10px 0; color: #FFFF00; font-size: 60px;}
-  .target { color: #FFCC66; }
-  hr { border-color: #FFCC66; margin: 20px 0 0 0;}
+  .raised { margin: 20px 0 10px 0; color: #FFF; font-size: 60px;}
+  .target { color: rgba(255, 255, 255, 0.7) }
+  hr { border-color: rgba(255, 255, 255, 0.7); margin: 20px 0 0 0;}
   h1 { font-size: 21px; }
   .ui-progressbar {
     position: relative;
@@ -38,7 +42,7 @@ $.get( "http://s3-eu-west-1.amazonaws.com/wiggysweb/campaigns.json" )
 	for (var i = 0; i < json_obj.length; i++) {
 		create_campaign(json_obj[i]);
 	}
-	style_page((100/json_obj.length).toFixed(2));
+	style_page();
   });
 
 function create_campaign(data) {
@@ -70,7 +74,6 @@ function create_campaign(data) {
 }
 
 function style_page(campaign_width) {
-	$( ".campaign" ).css("width",campaign_width+'%');
 	$.each($(".progressbar"), function() {
 	    $(this).progressbar({ value: parseInt($(this).attr("value")) });
 	});
