@@ -40,7 +40,7 @@ def timed_job():
 			thisDict['updated'] = ts
 
 			# Get Pledges
-			pledges_page = requests.get(list['url']+'/show_tab/pledges')
+			pledges_page = requests.get(list['url']+'/show_tab/pledges?count=30')
 			pledges_tree = html.fromstring(pledges_page.text)
 
 			pledges = []

@@ -59,21 +59,11 @@ function create_campaign(data) {
 	html += '<div class="raised">' + data['currency'] + data['amountRaised'] +'</div>';
 	html += '<div class="target">Target: ' + data['currency'] + data['amountTarget'] + '</div>';
 	html += '<hr>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
-	html += '<table><tr><td class="pledge_name">Pledge Name</td><td class="pledge_amount">$100</td></tr></table>';
+	html += '<table>'
+	data['pledges'].forEach(function(pledge) {
+		html += '<table><tr><td class="pledge_name">'+pledge[0]+'</td><td class="pledge_amount">'+pledge[1]+'</td></tr></table>';
+	});
+	html += '</table>';
 	html += '</div></div>';
 	$( "body" ).append(html);
 }
