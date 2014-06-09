@@ -25,7 +25,7 @@ def timed_job():
 		if 'url' in list:
 			thisDict = {}
 
-			# Fetch data from url
+			# Fetch campaign data from url
 			page = requests.get(list['url'])
 			tree = html.fromstring(page.text)
 
@@ -38,6 +38,13 @@ def timed_job():
 			thisDict['amountRaised'] = str(amountRaisedFull[0][1:]).replace(',', '')
 			thisDict['url'] = list['url']
 			thisDict['updated'] = ts
+
+			# Get Pledges
+			pledges_page = requests.get(list['url']+'#pledges')
+			pledges_tree = html.fromstring(pledges_page.text)
+
+			thisDict['pledge_names'] = str(tree.xpath('//div[@class="i-name"]/a/text()'))
+			thisDict['pledge_amounts'] = str(tree.xpath('//span[@class="currency-small"]/span/text()'))
 
 			data_update.append(thisDict)
 
