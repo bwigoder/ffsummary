@@ -46,8 +46,9 @@ def timed_job():
 			pledges = []
 			pledge_names = pledges_tree.xpath('//div[@class="i-name"]/text() | //div[@class="i-name"]/a/text()')
 			pledge_amounts = pledges_tree.xpath('//div[@class="i-centered-block"]/span/span/text()')
+			pledge_time = pledges_tree.xpath('//div[@class="i-centered-block"]/div[@class="i-note"]/text()')
 
-			thisDict['pledges'] = zip(pledge_names, pledge_amounts)
+			thisDict['pledges'] = zip(pledge_names, pledge_amounts, pledge_time)
 
 			data_update.append(thisDict)
 
