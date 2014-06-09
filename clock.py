@@ -43,8 +43,11 @@ def timed_job():
 			pledges_page = requests.get(list['url']+'/show_tab/pledges')
 			pledges_tree = html.fromstring(pledges_page.text)
 
-			thisDict['pledge_names'] = pledges_tree.xpath('//div[@class="i-name"]/text() | //div[@class="i-name"]/a/text()')
-			thisDict['pledge_amounts'] = pledges_tree.xpath('//div[@class="i-centered-block"]/span/span/text()')
+			pledges = []
+			pledge_names = pledges_tree.xpath('//div[@class="i-name"]/text() | //div[@class="i-name"]/a/text()')
+			pledge_amounts = pledges_tree.xpath('//div[@class="i-centered-block"]/span/span/text()')
+
+			thisDict['pledges'] = zip(pledge_names, pledge_amounts)
 
 			data_update.append(thisDict)
 
